@@ -1,0 +1,7 @@
+
+mat-grid-tile mat-card.activo{
+    background-color: springgreen;
+}
+mat-grid-tile mat-card.inactivo{
+    background-color: darkgray;
+}

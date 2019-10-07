@@ -1,0 +1,11 @@
+<mat-grid-list *ngIf="id_proceso==28 || id_proceso==29" cols="2" rowHeight="2:2" gutterSize="8">
+    <mat-grid-tile  *ngFor="let producto of listaProductos" >
+        <mat-card  [ngClass]="productoGuardado==producto.id_producto ? 'producto activo':'producto'"  (click)="selectProducto(producto)"><h4>{{producto.nombre}}</h4></mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list *ngIf="id_proceso!=28 && id_proceso!=29" cols="3" rowHeight="3:2" gutterSize="8">
+    <mat-grid-tile  *ngFor="let producto of listaProductos" >
+        <mat-card  [ngClass]="productoGuardado==producto.id_producto ? 'producto activo':'producto'"  (click)="selectProducto(producto)"><h4>{{producto.nombre}}</h4></mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

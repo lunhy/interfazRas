@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td, th {
+    width: 25%;
+}
+
+.operador{
+    cursor: pointer;
+}
+.activo{
+    background-color: springgreen;
+}
+.azul{
+    background-color: blue;
+}
+.verde{
+    background-color: green;
+}
+.amarillo{
+    background-color: yellow;
+}
+.alerta{
+    background-color: red;
+}

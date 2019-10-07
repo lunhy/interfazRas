@@ -1,0 +1,41 @@
+<div class="gridListItems">
+    <mat-grid-list cols="3" rowHeight="3:2" gutterSize="8">
+        <mat-grid-tile (click)="selectMaterial()" >
+            <mat-icon >assignment</mat-icon>
+            <mat-grid-tile-footer *ngIf="proceso!=null && operador!=null && producto!=null && material!=null" class="menu activo">Material</mat-grid-tile-footer>
+            <mat-grid-tile-footer *ngIf="proceso==null || operador==null || material==null || producto==null" class="menu inactivo">Material</mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile (click)="selectOperador()">
+            <mat-icon>perm_identity</mat-icon>
+            <mat-grid-tile-footer *ngIf="proceso!=null && operador!=null" class="menu activo">Operador</mat-grid-tile-footer>
+            <mat-grid-tile-footer *ngIf="proceso==null || operador==null" class="menu inactivo">Operador</mat-grid-tile-footer>        </mat-grid-tile>
+        <mat-grid-tile (click)="selectProceso()">
+            <mat-icon >timeline</mat-icon>
+            <mat-grid-tile-footer *ngIf="proceso!=null" class="menu activo">Proceso</mat-grid-tile-footer>
+            <mat-grid-tile-footer *ngIf="proceso==null" class="menu inactivo">Proceso</mat-grid-tile-footer>        </mat-grid-tile>
+        <mat-grid-tile (click)="selectCalidad()">
+            <mat-icon>build</mat-icon>
+            <mat-grid-tile-footer class="menu">Calidad</mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile (click)="selectProducto()" >
+            <mat-icon >visibility</mat-icon>
+            <mat-grid-tile-footer *ngIf="proceso!=null && operador!=null && producto!=null" class="menu activo">Producto</mat-grid-tile-footer>
+            <mat-grid-tile-footer *ngIf="proceso==null || operador==null || producto==null" class="menu inactivo">Producto</mat-grid-tile-footer>        </mat-grid-tile>
+        <mat-grid-tile (click)="selectBitacora()">
+            <mat-icon >info</mat-icon>
+            <mat-grid-tile-footer class="menu">Bitacora</mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile >
+            <mat-icon >check_circle</mat-icon>
+            <mat-grid-tile-footer class="menu">SGC</mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile >
+            <mat-icon >folder</mat-icon>
+            <mat-grid-tile-footer class="menu">Mantenimiento</mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile (click)="salir()" >
+            <mat-icon >input</mat-icon>
+            <mat-grid-tile-footer class="menu">Paro de Emergencia</mat-grid-tile-footer>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

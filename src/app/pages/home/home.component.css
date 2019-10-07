@@ -1,0 +1,34 @@
+mat-grid-tile{
+    border: 1px solid darkgrey;
+    font-size: 120px;
+}
+
+
+.gridListItems mat-icon {
+    cursor: pointer;
+}
+   
+.gridListItems mat-grid-list {
+    margin: 8px;
+}
+  
+.gridListItems mat-grid-tile mat-icon {
+    padding-bottom: 32px;
+}
+  
+.gridListItems mat-grid-tile mat-grid-tile-footer.activo {
+    background: green;
+    height: 36px;
+}
+.gridListItems mat-grid-tile mat-grid-tile-footer.inactivo {
+    background: red;
+    height: 36px;
+}
+
+.menu {
+ cursor: pointer;
+}
+
+
+  
+  

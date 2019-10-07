@@ -1,0 +1,22 @@
+
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+  
+        <ng-container  matColumnDef="id_material">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Id Material</th>
+          <td mat-cell   *matCellDef="let material"> {{material.id_material}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell [ngClass]="id_materiales!=null && id_materiales.includes(material)?'material activo':'material' " (click)="selectMaterial(material)"  *matCellDef="let material;">{{material.nombre}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="clave">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Clave </th>
+          <td mat-cell *matCellDef="let material">{{material.clave}}</td>
+        </ng-container>
+         
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>

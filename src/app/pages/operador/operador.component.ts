@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { WsService } from '../../services/ws.service';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SocketService } from '../../services/socket.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AltaComponent } from './alta/alta.component';
 
 import Swal from 'sweetalert2';
 
@@ -17,36 +19,25 @@ export class OperadorComponent implements OnInit {
   id_proceso;
   operadorGuardado;
   dataSource;
-  datos;
+  datos=[];
   led1=1;
   led2=0;
-  displayedColumns: string[] = ['id_empleado', 'nivel'];
+  displayedColumns: string[] = ['Nombre','APP','APM'];
   
   
-  constructor(private webService:WsService,private socket:SocketService) {
+  constructor(private webService:WsService,private socket:SocketService,private dialog: MatDialog,) {
     this.id_proceso=localStorage.getItem('id_proceso');
   } 
   
   ngOnInit() {
-    this.getUsers(this.id_proceso);
     this.webService.id_operador.subscribe(operador=>{
       this.operadorGuardado=operador;
     });
-    this.operadorGuardado=localStorage.getItem('id_operador');
+    this.operadorGuardado=JSON.parse(localStorage.getItem('id_operadores'));
 
   }
 
-  getUsers(id){
-      this.webService.getUsers(id).subscribe(resp=>{
-        console.log("Desde WS: ",resp);
-        if(resp){
-          this.datos=resp['data'];
-          this.dataSource= new MatTableDataSource(this.datos);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-        }
-      });
-  }
+  
   
   selectOperador(operador){
     console.log("operado: ",operador);
@@ -97,5 +88,37 @@ export class OperadorComponent implements OnInit {
       this.socket.alerta(1);
       this.led2=1;
     }
+  }
+  alta(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+    dialogConfig.data={
+      id_proceso:this.id_proceso
+    }
+    const dialogRefalta=this.dialog.open(AltaComponent,dialogConfig);
+
+    dialogRefalta.afterClosed().subscribe(result => {
+      if(result!=null){
+        if(result.length>0){
+          for(let i=0; i<result.length; i++){
+            var data={
+              'Nombre':result[i].nombre,
+              'APP':result[i].app,
+              'APM':result[i].apm,
+              'id_operador':result[i].id_operador
+            }
+            this.datos.push(data);
+          }
+          localStorage.removeItem('id_operadores');
+          localStorage.setItem('id_operadores',JSON.stringify(this.datos));
+          this.webService.operador.next(this.datos);
+          this.dataSource= new MatTableDataSource(this.datos);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        }
+      }  
+    });
   }
 }

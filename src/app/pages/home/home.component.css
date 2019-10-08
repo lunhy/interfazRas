@@ -1,6 +1,7 @@
 mat-grid-tile{
     border: 1px solid darkgrey;
     font-size: 120px;
+    border-radius: 1rem;
 }
 
 
@@ -13,16 +14,18 @@ mat-grid-tile{
 }
   
 .gridListItems mat-grid-tile mat-icon {
-    padding-bottom: 32px;
+    display: contents;
+    font-size: smaller;
 }
   
+.gridListItems mat-grid-tile mat-grid-tile-footer {
+    height: 36px;
+}
 .gridListItems mat-grid-tile mat-grid-tile-footer.activo {
     background: green;
-    height: 36px;
 }
 .gridListItems mat-grid-tile mat-grid-tile-footer.inactivo {
     background: red;
-    height: 36px;
 }
 
 .menu {

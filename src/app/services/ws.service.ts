@@ -39,4 +39,8 @@ export class WsService {
     let url=`http://192.168.2.107:3000/materiales/${producto}/${proceso}`;
     return this.http.get(url);
   }
+  altaOperador(id,pass){
+    let url=`http://192.168.2.107:3000/altaOperador/${id}/${pass}`;
+    return this.http.get(url);
+  }
 }

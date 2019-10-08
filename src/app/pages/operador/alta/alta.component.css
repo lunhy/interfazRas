@@ -1,0 +1,8 @@
+table {
+    text-align: center !important;
+    width: 100%;
+    cursor: pointer;
+}
+.activo{
+    background-color: green;
+}

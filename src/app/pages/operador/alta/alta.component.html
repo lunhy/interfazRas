@@ -1,0 +1,32 @@
+
+<h2 mat-dialog-title>Alta Usuario</h2>
+
+
+  
+
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+
+        <ng-container  matColumnDef="Nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell [ngClass]="operadores.includes(user.id_operador)?'activo':'false'" (click)="selectUsuario(user.id_operador)" *matCellDef="let user"> {{user.nombre}} </td>
+        </ng-container>
+        <ng-container  matColumnDef="ApellidoPaterno">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido Paterno</th>
+          <td mat-cell [ngClass]="operadores.includes(user.id_operador)?'activo':'false'" (click)="selectUsuario(user.id_operador)" *matCellDef="let user"> {{user.app}} </td>
+        </ng-container>
+        <ng-container  matColumnDef="ApellidoMaterno">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido Materno</th>
+          <td mat-cell [ngClass]="operadores.includes(user.id_operador)?'activo':'false'" (click)="selectUsuario(user.id_operador)" *matCellDef="let user"> {{user.apm}} </td>
+        </ng-container>
+      
+         
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator MatPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>  
+ 
+
+<mat-dialog-actions>
+  <button class="mat-raised-button mat-primary" [mat-dialog-close]="datosOperadores" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions>

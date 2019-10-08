@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.operador=localStorage.getItem('id_operador');
+    this.operador=JSON.parse(localStorage.getItem('id_operadores'));
     this.proceso=localStorage.getItem('id_proceso');
     this.producto=localStorage.getItem('id_producto');
     this.material=localStorage.getItem('id_material');

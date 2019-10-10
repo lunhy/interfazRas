@@ -1,5 +1,6 @@
-<button color="warn" mat-fab [routerLink]="['/home']" routerLinkActive="router-link-active" >Regresar</button>
-
+<button color="warn" mat-fab [routerLink]="['/home']" routerLinkActive="router-link-active" >
+    <mat-icon>keyboard_backspace</mat-icon>
+  </button>
 <mat-grid-list cols="3" rowHeight="3:2" gutterSize="8">
     <mat-grid-tile  *ngFor="let proceso of listaProcesos" >
         <mat-card  [ngClass]="procesoGuardado==proceso.id_proceso ? 'activo':'inactivo'"  (click)="selectProceso(proceso)"><h4>{{proceso.proceso}}</h4></mat-card>

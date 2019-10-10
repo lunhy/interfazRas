@@ -18,7 +18,13 @@ export class HomeComponent implements OnInit {
   alert:'';
   constructor(private router:Router,private ws:WsService,private socket:SocketService) { 
     this.ws.id_operador.subscribe(ope=>{
-      this.operador=ope;
+      if(ope!=null){
+        if(ope.length>0){
+          this.operador=ope;
+        }else{
+          this.operador=null;
+        }
+      }
     });
     this.ws.id_proceso.subscribe(proc=>{
       this.proceso=proc;
@@ -33,7 +39,18 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.operador=JSON.parse(localStorage.getItem('id_operadores'));
+    if(localStorage.getItem('id_operadores')!=null){
+      if(JSON.parse(localStorage.getItem('id_operadores')).length>0){
+        this.operador=JSON.parse(localStorage.getItem('id_operadores'));
+      }else{
+        this.operador=null;
+      }
+    }
+    if(localStorage.getItem('id_producto')!=null){
+      this.producto=JSON.parse(localStorage.getItem('id_producto'));
+    }else{
+      this.producto=null;
+    }
     this.proceso=localStorage.getItem('id_proceso');
     this.producto=localStorage.getItem('id_producto');
     this.material=localStorage.getItem('id_material');

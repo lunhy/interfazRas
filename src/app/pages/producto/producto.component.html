@@ -1,4 +1,13 @@
-<mat-grid-list *ngIf="id_proceso==28 || id_proceso==29" cols="2" rowHeight="2:2" gutterSize="8">
+<button color="warn" mat-fab [routerLink]="['/home']" routerLinkActive="router-link-active" >
+    <mat-icon>keyboard_backspace</mat-icon>
+</button>
+<button color="primary" mat-fab (click)="altaProducto()" >
+    <mat-icon>add</mat-icon>
+</button>
+<button color="primary" mat-fab (click)="bajaProducto()" >
+    <mat-icon>remove</mat-icon>
+</button>
+<!-- <mat-grid-list *ngIf="id_proceso==28 || id_proceso==29" cols="2" rowHeight="2:2" gutterSize="8">
     <mat-grid-tile  *ngFor="let producto of listaProductos" >
         <mat-card  [ngClass]="productoGuardado==producto.id_producto ? 'producto activo':'producto'"  (click)="selectProducto(producto)"><h4>{{producto.nombre}}</h4></mat-card>
     </mat-grid-tile>
@@ -7,5 +16,24 @@
 <mat-grid-list *ngIf="id_proceso!=28 && id_proceso!=29" cols="3" rowHeight="3:2" gutterSize="8">
     <mat-grid-tile  *ngFor="let producto of listaProductos" >
         <mat-card  [ngClass]="productoGuardado==producto.id_producto ? 'producto activo':'producto'"  (click)="selectProducto(producto)"><h4>{{producto.nombre}}</h4></mat-card>
+    </mat-grid-tile>
+</mat-grid-list> -->
+<h2>Productos Activos</h2>
+<mat-grid-list cols="3" rowHeight="3:2" *ngIf="listaProductos==null || listaProductos.length==0">
+    <mat-grid-tile >
+    </mat-grid-tile>
+    <mat-grid-tile >
+        <mat-card >
+            <h3>No hay productos activos.</h3>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="3" rowHeight="3:2" *ngIf="listaProductos.length>0">
+    <mat-grid-tile >
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let producto of listaProductos" >
+        <mat-card >
+            {{producto.nombre}}
+        </mat-card>
     </mat-grid-tile>
 </mat-grid-list>

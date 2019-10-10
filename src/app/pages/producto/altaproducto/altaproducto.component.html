@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Alta Producto</h2>
+
+<mat-dialog-content>
+   
+    <mat-grid-list *ngIf="listaProductos.length==1" cols="1" rowHeight="1:2" gutterSize="2">
+        <mat-grid-tile *ngFor="let producto of listaProductos">
+            <mat-card (click)="selectProducto(producto.id_producto)" [ngClass]="{'activo': selectedIndex == producto.id_producto}" >
+                <mat-icon>time_to_leave</mat-icon>
+                <mat-card-footer>{{producto.clave}}</mat-card-footer>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+    
+    <mat-grid-list *ngIf="listaProductos.length==2" cols="2" rowHeight="2:2" gutterSize="2">
+        <mat-grid-tile *ngFor="let producto of listaProductos">
+            <mat-card (click)="selectProducto(producto.id_producto)" [ngClass]="{'activo': selectedIndex == producto.id_producto}" >
+                <mat-icon>time_to_leave</mat-icon>
+                <mat-card-footer>{{producto.clave}}</mat-card-footer>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+    
+    <mat-grid-list *ngIf="listaProductos.length>2" cols="3" rowHeight="3:2" gutterSize="2">
+        <mat-grid-tile *ngFor="let producto of listaProductos">
+            <mat-card (click)="selectProducto(producto)" [ngClass]="{'activo': selectedIndex == producto.id_producto}" >
+                <mat-icon>time_to_leave</mat-icon>
+                <mat-card-footer>{{producto.clave}}</mat-card-footer>
+            </mat-card>
+
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="mat-raised-button mat-warn" (click)="close()">Cerrar</button>
+    <span class="spacer"></span>
+    <button  class="mat-raised-button mat-primary" [mat-dialog-close]="producto" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions>

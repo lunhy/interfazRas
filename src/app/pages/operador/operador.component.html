@@ -1,22 +1,28 @@
-<button color="warn" mat-fab [routerLink]="['/home']" routerLinkActive="router-link-active" >Regresar</button>
+<button color="warn" mat-fab [routerLink]="['/home']" routerLinkActive="router-link-active" >
+  <mat-icon>keyboard_backspace</mat-icon>
+</button>
+<button color="primary" mat-fab (click)="altaOperador()" >
+  <mat-icon>add</mat-icon>
+</button>
+<button color="primary" mat-fab (click)="bajaOperador()" >
+  <mat-icon>remove</mat-icon>
+</button>
 
-<button color="primary" mat-fab (click)="alta()" >Alta</button>
-
-
+<h2 style>Operadores Activos</h2>
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
   
 
       <ng-container  matColumnDef="Nombre">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-        <td mat-cell (click)="selectOperador(user)" *matCellDef="let user"> {{user.Nombre}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.Nombre}} </td>
       </ng-container>
       <ng-container  matColumnDef="APP">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido Paterno</th>
-        <td mat-cell (click)="selectOperador(user)" *matCellDef="let user"> {{user.APP}} </td>
+        <td mat-cell  *matCellDef="let user"> {{user.APP}} </td>
       </ng-container>
       <ng-container  matColumnDef="APM">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido Materno</th>
-        <td mat-cell (click)="selectOperador(user)" *matCellDef="let user"> {{user.APM}} </td>
+        <td mat-cell  *matCellDef="let user"> {{user.APM}} </td>
       </ng-container>
     
        

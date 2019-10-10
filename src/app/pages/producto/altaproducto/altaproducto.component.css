@@ -1,6 +1,6 @@
-table {
-    text-align: center !important;
-    width: 100%;
+mat-card{
+    text-align: center;
+    padding: 20px;
     cursor: pointer;
 }
 .activo{

@@ -1,4 +1,6 @@
-
+button.mat-fab{
+    margin: 10px;
+}
 mat-grid-tile mat-card.activo{
     background-color: springgreen;
 }

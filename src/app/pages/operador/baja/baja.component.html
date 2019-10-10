@@ -1,11 +1,11 @@
 
-<h2 mat-dialog-title>Alta Usuario</h2>
+<h2 mat-dialog-title>Baja Usuario</h2>
 
 <button disabled="true" class="mat-raised-button mat-primary">RFID</button>
 
   
 <mat-dialog-content>
-  <table mat-table [dataSource]="listaOperadores" matSort>
+  <table mat-table [dataSource]="dataSource" matSort>
   
 
     <ng-container  matColumnDef="Nombre">
@@ -20,8 +20,8 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido Materno</th>
       <td mat-cell [ngClass]="{'activo': selectedRowIndex == user.id_operador}" (click)="selectUsuario(user.id_operador)" *matCellDef="let user"> {{user.APM}} </td>
     </ng-container>
-  
-      
+   
+     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
@@ -30,5 +30,5 @@
  
 
 <mat-dialog-actions align="end">
-  <button  class="mat-raised-button mat-primary" [mat-dialog-close]="datosOperadores" cdkFocusInitial>Aceptar</button>
+  <button class="mat-raised-button mat-primary" [mat-dialog-close]="datos" cdkFocusInitial>Aceptar</button>
 </mat-dialog-actions>

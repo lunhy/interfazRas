@@ -4,6 +4,6 @@ table {
     cursor: pointer;
 }
 .activo{
-    background-color: green;
+    background-color: red;
 }
 .spacer {flex: 1 1 auto;}

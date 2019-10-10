@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ɵConsole } from '@angular/core';
 import { WsService } from '../../services/ws.service';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SocketService } from '../../services/socket.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AltaComponent } from './alta/alta.component';
+import { BajaComponent } from './baja/baja.component';
 
 import Swal from 'sweetalert2';
 
@@ -25,34 +26,33 @@ export class OperadorComponent implements OnInit {
   displayedColumns: string[] = ['Nombre','APP','APM'];
   
   
-  constructor(private webService:WsService,private socket:SocketService,private dialog: MatDialog,) {
+  constructor(private webService:WsService,private socket:SocketService,private dialog: MatDialog) {
     this.id_proceso=localStorage.getItem('id_proceso');
+    this.webService.id_operador.subscribe(resOpe=>{
+      if(resOpe!=null){
+        this.datos=resOpe;
+      }
+    });
+    
+    if(localStorage.getItem('id_operadores')){
+      this.datos=JSON.parse(localStorage.getItem('id_operadores'));
+    }
   } 
   
   ngOnInit() {
-    this.webService.id_operador.subscribe(operador=>{
-      this.operadorGuardado=operador;
-    });
-    this.operadorGuardado=JSON.parse(localStorage.getItem('id_operadores'));
-
-  }
-
-  
-  
-  selectOperador(operador){
-    console.log("operado: ",operador);
-    if(operador.id_empleado == this.operadorGuardado){
-      console.log("son iguales");
-      this.webService.operador.next(null);
-      localStorage.setItem('id_operador',this.operadorGuardado);
-      this.operadorGuardado=localStorage.removeItem('id_operador');
-      Swal.fire({type:'success',title:'Baja Operador',timer:1000,showConfirmButton:false});
-    }else{
-      this.webService.operador.next(operador.id_empleado);
-      localStorage.setItem('id_operador',this.operadorGuardado);
-      Swal.fire({type:'success',title:'Operador Seleccionado',timer:1000,showConfirmButton:false});
+    if(localStorage.getItem('id_operadores')){
+      this.datos=JSON.parse(localStorage.getItem('id_operadores'));
+    }    
+    if(this.datos!=null){
+      this.dataSource= new MatTableDataSource(this.datos);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     }
+  
   }
+
+  
+  
   azul(){
     if(this.led1===1){
       this.socket.azul(0);
@@ -89,7 +89,8 @@ export class OperadorComponent implements OnInit {
       this.led2=1;
     }
   }
-  alta(){
+  
+  altaOperador(){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -97,16 +98,16 @@ export class OperadorComponent implements OnInit {
     dialogConfig.data={
       id_proceso:this.id_proceso
     }
-    const dialogRefalta=this.dialog.open(AltaComponent,dialogConfig);
+    const dialogRefAlta=this.dialog.open(AltaComponent,dialogConfig);
 
-    dialogRefalta.afterClosed().subscribe(result => {
+    dialogRefAlta.afterClosed().subscribe(result => {
       if(result!=null){
         if(result.length>0){
           for(let i=0; i<result.length; i++){
             var data={
-              'Nombre':result[i].nombre,
-              'APP':result[i].app,
-              'APM':result[i].apm,
+              'Nombre':result[i].Nombre,
+              'APP':result[i].APP,
+              'APM':result[i].APM,
               'id_operador':result[i].id_operador
             }
             this.datos.push(data);
@@ -119,6 +120,26 @@ export class OperadorComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
         }
       }  
+    });
+  }
+
+  bajaOperador(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+    dialogConfig.data={
+      operadoresActivos:this.datos
+    }
+    const dialogRefBaja=this.dialog.open(BajaComponent,dialogConfig);
+
+    dialogRefBaja.afterClosed().subscribe(result => {
+      if(result!=null){
+        this.datos=result;
+        this.dataSource= new MatTableDataSource(this.datos);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
     });
   }
 }

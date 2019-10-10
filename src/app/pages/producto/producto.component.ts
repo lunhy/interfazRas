@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WsService } from '../../services/ws.service';
+import { MatDialog,MatDialogConfig } from '@angular/material';
 import Swal from 'sweetalert2';
+import { AltaproductoComponent } from './altaproducto/altaproducto.component';
 
 @Component({
   selector: 'app-producto',
@@ -11,26 +13,23 @@ export class ProductoComponent implements OnInit {
 
   id_proceso;
   productoGuardado;
-  listaProductos; 
+  listaProductos=[]; 
 
-  constructor(private ws:WsService) {
+  constructor(private ws:WsService,private dialog: MatDialog) {
     this.id_proceso=localStorage.getItem('id_proceso');
   }
 
   ngOnInit() {
-    this.getProductos(this.id_proceso);
     this.ws.id_producto.subscribe(prod=>{
-      this.productoGuardado=prod;
-    });
-    this.productoGuardado=localStorage.getItem('id_producto');
-  }
-
-  getProductos(id){
-    this.ws.getProductos(id).subscribe(prod=>{
       if(prod!=null){
-        this.listaProductos=prod['data'];
+        this.listaProductos=[];
+        this.listaProductos.push(prod);
       }
     });
+    if(JSON.parse(localStorage.getItem('id_producto'))!=null){
+      this.listaProductos=[];
+      this.listaProductos.push(JSON.parse(localStorage.getItem('id_producto')));
+    }
   }
 
   selectProducto(producto){
@@ -53,5 +52,31 @@ export class ProductoComponent implements OnInit {
 
       Swal.fire({type:'success',title:'Producto Seleccionado',timer:1000,showConfirmButton:false});
     }
+  }
+  
+  altaProducto(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+    dialogConfig.data={
+      id_proceso:this.id_proceso
+    }
+    const dialogRefAlta=this.dialog.open(AltaproductoComponent,dialogConfig);
+
+    dialogRefAlta.afterClosed().subscribe(result => {
+      if(result!=null){
+        console.log(result)
+        localStorage.removeItem('id_producto');
+        localStorage.setItem('id_producto',JSON.stringify(result));
+        this.ws.producto.next(result);
+        this.listaProductos=[];
+        this.listaProductos.push(result);
+      }
+    });
+  }
+
+  bajaProducto(){
+    
   }
 }

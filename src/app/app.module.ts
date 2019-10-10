@@ -18,7 +18,10 @@ import { MaterialComponent } from './pages/material/material.component';
 import { OperadorComponent } from './pages/operador/operador.component';
 import { ProcesoComponent } from './pages/proceso/proceso.component';
 import { ProductoComponent } from './pages/producto/producto.component';
-import { AltaComponent, pass } from './pages/operador/alta/alta.component';
+import { AltaComponent, passAlta } from './pages/operador/alta/alta.component';
+import { BajaComponent, passBaja } from './pages/operador/baja/baja.component';
+import { BajaproductoComponent } from './pages/producto/bajaproducto/bajaproducto.component';
+import { AltaproductoComponent } from './pages/producto/altaproducto/altaproducto.component';
 const config: SocketIoConfig = { url: 'http://192.168.2.107:3000', options: {} };
 
 
@@ -31,7 +34,11 @@ const config: SocketIoConfig = { url: 'http://192.168.2.107:3000', options: {} }
     ProcesoComponent,
     ProductoComponent,
     AltaComponent,
-    pass,
+    passAlta,
+    BajaComponent,
+    passBaja,
+    BajaproductoComponent,
+    AltaproductoComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +63,6 @@ const config: SocketIoConfig = { url: 'http://192.168.2.107:3000', options: {} }
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AltaComponent,pass]
+  entryComponents:[AltaComponent,passAlta,BajaComponent,passBaja,AltaproductoComponent,BajaproductoComponent]
 })
 export class AppModule { }

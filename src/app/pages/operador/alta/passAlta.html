@@ -1,0 +1,13 @@
+<mat-dialog-content>
+  
+    <mat-form-field>
+        <input matInput type="password" placeholder="Contraseña" [(ngModel)]="pass" >
+      </mat-form-field>
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" >
+    <button class="mat-raised-button mat-warn"(click)="close()">Cerrar</button>
+    <span class="spacer"></span>
+    <button class="mat-raised-button mat-primary" [mat-dialog-close]="pass" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions> 
